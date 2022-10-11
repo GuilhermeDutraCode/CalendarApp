@@ -1,7 +1,35 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 let ContactList = () => {
+    const url = "https://jsonplaceholder.typicode.com/users/"
+
+    const [data, setDate] = useState([])
+    useEffect(() => {
+        axios.get(url)
+        .then(res => {
+            console.log("getting all users", res.data)
+            setDate(res.data)
+        })
+        .catch(err => console.log(err))
+    }, [])
+
+    const arr = data.map((data, index) => { //iterate trough JSON data recieved and select individual parameters to render on DOM
+        return (
+            <ul className='list-group'>
+             <li className='list-group-item list-group-item-action'>
+            Name: <span className='fw-bold'>{data.name}</span>
+            </li>
+            <li className='list-group-item list-group-item-action'>
+            Mobile: <span className='fw-bold'>{data.phone}</span>
+            </li>
+            <li className='list-group-item list-group-item-action'>
+            Email: <span className='fw-bold'>{data.email}</span>
+            </li>
+            </ul>
+        )
+    })              
     return(
         <React.Fragment>
            <section className='contact-search p-3'>
@@ -48,17 +76,7 @@ let ContactList = () => {
                                             <img src="https://www.nicepng.com/png/detail/128-1280406_view-user-icon-png-user-circle-icon-png.png" alt="user" className='contact-img' />
                                         </div>
                                         <div className="col-md-7">
-                                            <ul className='list-group'>
-                                                <li className='list-group-item list-group-item-action'>
-                                                    Name: <span className='fw-bold'>Guilherme</span>
-                                                </li>
-                                                <li className='list-group-item list-group-item-action'>
-                                                    Mobile: <span className='fw-bold'>04102298</span>
-                                                </li>
-                                                <li className='list-group-item list-group-item-action'>
-                                                    Email: <span className='fw-bold'>guilhermedutra02syd@gmail.com</span>
-                                                </li>
-                                            </ul>
+                                            {arr}
                                         </div>
                                         <div className='col-md-1 d-flex flex-column align-items-center my-1'>
                                             <Link to={'/contacts/view/:contactId'} className='btn btn-warning'>
