@@ -16,6 +16,9 @@ let ContactList = () => {
     }, [])
 
     const arr = data.map((data, index) => { //iterate trough JSON data recieved and select individual parameters to render on DOM
+        if (data.length === 0){
+            <p>Loading data</p>
+        } else {
         return (
             <ul className='list-group'>
              <li className='list-group-item list-group-item-action'>
@@ -29,6 +32,7 @@ let ContactList = () => {
             </li>
             </ul>
         )
+        }
     })              
     return(
         <React.Fragment>
