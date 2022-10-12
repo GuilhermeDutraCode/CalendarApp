@@ -79,13 +79,7 @@ let ContactList = () => {
                                                 </li>
                                                 <li className='list-group-item list-group-item-action'>
                                                     Website: <span className='fw-bold'>{ selectedPerson.website || 'Loading...'}</span>
-                                                </li> 
-                                                <li className='list-group-item list-group-item-action'>
-                                                    Address: <span className='fw-bold'>{ selectedPerson.address.street + ', '+ selectedPerson.address.city || 'Loading...'}</span>
-                                                </li>
-                                                <li className='list-group-item list-group-item-action'>
-                                                    Company: <span className='fw-bold'>{ selectedPerson.company.name || 'Loading...'}</span>
-                                                </li>                                                                                                                                                                                                                                                                                                                                                                                                                   
+                                                </li>                                                                                                                                                                                                                                                                                                                                                                                                     
                                             </ul>
                                         </div>                                        
                                    </div>
