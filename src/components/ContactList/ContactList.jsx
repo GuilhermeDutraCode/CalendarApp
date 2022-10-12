@@ -7,26 +7,26 @@ let ContactList = () => {
     const [data, setDate] = useState([]);
     const [selectedPerson, setSelectedPerson] = useState({});
 
-    useEffect(() => {
+    useEffect(() => {   //axios GET request to get fake users info
         axios.get(url)
         .then(res => {
             console.log("getting all users", res.data)
             setDate(res.data)
-            setSelectedPerson(res.data[0]);
+            setSelectedPerson(res.data[0]);  //pass the id of first user to be first displayed on the DOM later
         })
         .catch(err => console.log(err))
     }, [])
 
-    const changeSelectedPerson = (id) => {
+    const changeSelectedPerson = (id) => {   //this function used to display the info of the contact selected by the id
         console.log(id);
         const person = data.filter((person) => person.id === id);
         setSelectedPerson(person[0]);
     }
 
-    const people = data.map((person, index) => { //iterate trough JSON data recieved and select individual parameters to render on DOM
+    const people = data.map((person, index) => { //iterate trough JSON data recieved and select individual info from users to render on DOM
         return (
             
-            <ul className='list-group' onClick={ () => changeSelectedPerson(person.id) } key={ person.id }>
+            <ul className='list-group' onClick={ () => changeSelectedPerson(person.id) } key={ person.id }>  
              <li className='list-group-item list-group-item-action'>
                  Name: <span className='fw-bold'>{person.name}</span>
             </li>
